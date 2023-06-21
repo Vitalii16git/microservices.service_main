@@ -1,24 +1,17 @@
-import express, { Request, Response, Application, NextFunction } from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import express, { Application } from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
-import axios from "axios";
+import logger from "./utils/logger";
+import router from "./routes/main.route";
 
 const app: Application = express();
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 5051;
 
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
-
-app.post("/register", async (req, res) => {
-  // Perform data validation and preprocessing
-
-  // Send requests to other microservices
-  await axios.post("http://localhost:3001/users/register", req.body);
-  await axios.post("http://localhost:3003/payments", req.body);
-
-  res.status(200).send("Registration successful");
-});
+app.use("/main", router);
 
 app.listen(PORT, () => {
-  console.log(`Service is running on port ${PORT}`);
+  logger.info(`Service is running on port ${PORT}`);
 });
