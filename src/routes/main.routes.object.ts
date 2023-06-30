@@ -1,13 +1,21 @@
-// import mainController from "../controllers/main.controller";
+import mainController from "../controllers/main.controller";
 
 const routes = [
   {
     method: "post",
-    routeName: "create",
-    url: "/create",
+    routeName: "userRegister",
+    url: "/register",
     validator: [],
     middleware: [],
-    controller: [],
+    controller: mainController.userRegister,
+  },
+  {
+    method: "post",
+    routeName: "userLogin",
+    url: "/login",
+    validator: [],
+    middleware: [],
+    controller: mainController.userLogin,
   },
 ];
 
